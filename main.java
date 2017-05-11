@@ -1,7 +1,8 @@
 import GLOOP.*;
 class main {
     GLTastatur mainKey = new GLTastatur();
-    int sleepTimer
+    int fpsBase = 60;
+    int sleepTimer 1000 / fpsBase;
     main() {
         while (!mainKey.esc()) {
 
