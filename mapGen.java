@@ -1,5 +1,5 @@
 import GLOOP.*;
-import org.json.*;
+import org.json;
 import java.nio.file;
 public class mapGen{
         GLOOP_object_generator GLOOP_gen=new GLOOP_object_generator();
