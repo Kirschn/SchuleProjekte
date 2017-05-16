@@ -1,0 +1,34 @@
+{
+  "sizeX": 3,
+  "sizeY": 3,
+  "mapScale": 100,
+  "map-data": {
+    "1_1": {
+      "entity_type": "block"
+    },
+    "1_2": {
+      "entity_type": "block"
+    },
+    "1_3": {
+      "entity_type": "block"
+    },
+    "2_1": {
+      "entity_type": "ground"
+    },
+    "2_2": {
+      "entity_type": "ground"
+    },
+    "2_3": {
+      "entity_type": "ground"
+    },
+    "3_1": {
+      "entity_type": "block"
+    },
+    "3_2": {
+      "entity_type": "block"
+    },
+    "3_3": {
+      "entity_type": "block"
+    },
+  }
+}
