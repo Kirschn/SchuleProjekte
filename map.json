@@ -2,7 +2,7 @@
   "sizeX": 3,
   "sizeY": 3,
   "mapScale": 100,
-  "map-data": {
+  "map_data": {
     "1_1": {
       "entity_type": "block"
     },

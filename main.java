@@ -7,7 +7,6 @@ class main {
     main() {
         mapGen.generateFromFile("map.json");
         while (!mainKey.esc()) {
-
             Sys.warte(sleepTimer);
         }
     }
