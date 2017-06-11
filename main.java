@@ -1,4 +1,6 @@
 import GLOOP.*;
+import javax.swing.JOptionPane;
+
 public class main {
     int fpsBase = 60;
     int sleepTimer = 1000 / fpsBase;
@@ -14,6 +16,10 @@ public class main {
         cam.setzePosition(200,100,200);
         cam.setzeBlickpunkt(200,100,199);
         while (!keyboard.esc()) {
+            if (posX == mapGenerator.winX() && posY == mapGenerator.winY()) {
+                this.infoBox("Gewonnen!", "Spiel");
+                System.exit(0);
+            }
             if (keyboard.links() && !buttonPressed) {
                 buttonPressed = true;
                 lookdir--;
@@ -83,5 +89,9 @@ public class main {
             }
             Sys.warte(sleepTimer);
         }
+    }
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 }

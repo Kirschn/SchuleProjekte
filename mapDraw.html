@@ -55,7 +55,7 @@
             if (element.getContext) {
                 canvasContext = element.getContext("2d");
             }
-            jsonString = window.prompt("gibe start json", "{}");
+            jsonString = window.prompt("Click on any tile to switch it's propertys, click on Tile 0 0 to output the JSON String. Start JSON:", '{"mapScale": 200, "sizeX": 32, "sizeY": 32, "map_data": {}}');
 
             if (typeof jsonString === "string") {
                 jsonString = JSON.parse(jsonString);
@@ -74,30 +74,48 @@
                 var mouseCoordLocalX = Math.floor(mouseX / 64);
                 var mouseCoordLocalY = Math.floor(mouseY / 64);
                 console.log(mouseCoordLocalX + " " + mouseCoordLocalY);
-                if (map_data[mouseCoordLocalX + "_" + mouseCoordLocalY] !== undefined) {
+				if (mouseCoordLocalX == 0 && mouseCoordLocalY == 0) {
+					jsonString.sizeX = window.prompt("Export Size X (Max X):", 32);
+					jsonString.sizeY = window.prompt("Export Size Y (Max Y):", 32);
+					jsonString.winX = window.prompt("Win Position X", 32);
+					jsonString.winY = window.prompt("Win Position Y", 32);
+					alert("JSON String written to Developer Console (F12). Paste this to map.json.")
+					console.log(JSON.stringify(jsonString));
+					return true;
+				}
+                if (map_data[mouseCoordLocalX + "_" + mouseCoordLocalY] == undefined) {
+					map_data[mouseCoordLocalX + "_" + mouseCoordLocalY] = {
+						    entity_type: "ground",
+							collide: false
+					};
+				}
                     console.log(map_data[mouseCoordLocalX + "_" + mouseCoordLocalY]);
                     switch(map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].entity_type) {
                         case "block":
                             console.log("Block case");
                             map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].entity_type = "ground";
+							map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].collide = false;
                             break;
                         case "ground":
                             console.log("Ground Case");
                             map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].entity_type = "block";
+							map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].collide = true;
                             break;
                         default:
                             // hell
                             console.log("HELL CASE");
+							map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].entity_type = "block";
+							map_data[mouseCoordLocalX + "_" + mouseCoordLocalY].collide = true;
                             break;
                     }
-                }
+                
             });
             setInterval(function() {
 
                 canvasContext.clearRect(0,0,document.getElementById("editorCanvas").width,
                     document.getElementById("editorCanvas").height);
                 generateEditorFromJSON(jsonString);
-                canvasContext.fillText("Mouse: " + mouseX + " "+ mouseY, 10, 25);
+                canvasContext.fillText("Mouse: " + mouseX + " "+ mouseY + "(Tile: " + Math.floor(mouseX / 64) + " " + Math.floor(mouseY / 64) + ")", 10, 25);
                 canvasContext.fillStyle="black";
 
 
@@ -112,6 +130,6 @@
 Textures:
 <br>
 <img id="floor" src="./boden.png">
-<img id="Wall" src="./Wall.png">
+<img id="Wall" src="./Wall.jpg">
 </body>
 </html>
