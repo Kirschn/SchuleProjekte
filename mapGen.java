@@ -5,11 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 public class mapGen {
         static GLOOP_object_generator GLOOP_gen=new GLOOP_object_generator();
-        public static void parseMapJSON(String mapJSON){
-            JSONObject mapObj=new JSONObject(mapJSON);
-            int mapSizeX=mapObj.getInt("sizeX");
-            int mapSizeY=mapObj.getInt("sizeY");
-            int mapScale=mapObj.getInt("mapScale");
+        JSONObject mapObj;
+        int mapSizeX, mapSizeY, mapScale;
+        public void parseMapJSON(String mapJSON){
+            mapObj=new JSONObject(mapJSON);
+            mapSizeX=mapObj.getInt("sizeX");
+            mapSizeY=mapObj.getInt("sizeY");
+            mapScale=mapObj.getInt("mapScale");
 
             for(int iX=1;iX<=mapSizeX;iX++){
                 for(int iY=1;iY<=mapSizeY;iY++){
@@ -31,16 +33,40 @@ public class mapGen {
                         // Generate hole (aka. just an empty entity)
                     break;
                     default:
-                        // what the fuck this shouldn't be possible
+                        // this shouldn't be possible
                         // probably faulty generation file
                         // or the map generator was fucked up
-                        System.out.println("What the F U C K " + iX +" " + iY);
                     break;
                     }
                 }
             }
         }
-    public void generateFromFile(String FILENAME){
+        public boolean canMoveTo(int x, int y) {
+                            System.out.println("Can Move to" + x + " " + y);
+                            
+            try {
+                String nameString = x+"_"+y;
+                System.out.println("String is " + nameString.replaceAll("\\.0*$", ""));
+
+            if (mapObj.getJSONObject("map_data").getJSONObject(nameString.replaceAll("\\.0*$", "")).getString("entity_type") == "exit") {
+                // win
+                                System.out.println("yes, win");
+                return true;
+
+            } else if (mapObj.getJSONObject("map_data").getJSONObject(nameString.replaceAll("\\.0*$", "")).getBoolean("collide")) {
+                                System.out.println("no, collide " + mapObj.getJSONObject("map_data").getJSONObject(nameString.replaceAll("\\.0*$", "")).getBoolean("collide"));
+                                
+                return false;
+            } else {
+                                System.out.println("yes, no collide");
+                return true;
+            }
+            } catch (Exception e) {
+                System.out.println("Yes, not defined");
+                return true;
+            }
+        }
+        public void generateFromFile(String FILENAME){
 
         BufferedReader br = null;
         FileReader fr = null;
