@@ -4,31 +4,40 @@
   "mapScale": 100,
   "map_data": {
     "1_1": {
-      "entity_type": "block"
+      "entity_type": "block",
+	 "hasEntity": false
     },
     "1_2": {
-      "entity_type": "block"
+      "entity_type": "block",
+	 "hasEntity": false
     },
     "1_3": {
-      "entity_type": "block"
+      "entity_type": "block",
+	 "hasEntity": false
     },
     "2_1": {
-      "entity_type": "ground"
+      "entity_type": "ground",
+	 "hasEntity": false
     },
     "2_2": {
-      "entity_type": "ground"
+      "entity_type": "ground",
+	 "hasEntity": false
     },
     "2_3": {
-      "entity_type": "ground"
+      "entity_type": "ground",
+	 "hasEntity": false
     },
     "3_1": {
-      "entity_type": "block"
+      "entity_type": "block",
+	 "hasEntity": false
     },
     "3_2": {
-      "entity_type": "block"
+      "entity_type": "block",
+	 "hasEntity": false
     },
     "3_3": {
-      "entity_type": "block"
+      "entity_type": "block",
+	 "hasEntity": false
     }
   }
 }

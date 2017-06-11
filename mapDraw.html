@@ -55,8 +55,8 @@
             if (element.getContext) {
                 canvasContext = element.getContext("2d");
             }
-            var elPrompt = window.prompt("gibe start json", "{}");
-            jsonString = elPrompt;
+            jsonString = window.prompt("gibe start json", "{}");
+
             if (typeof jsonString === "string") {
                 jsonString = JSON.parse(jsonString);
             }
